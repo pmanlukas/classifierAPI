@@ -1,4 +1,5 @@
 #TODO: Add imports for keras
+#TODO: Add code to create openAPI spec of this api
 import numpy as np
 import json
 import flask
