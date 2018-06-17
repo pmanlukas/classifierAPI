@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import json
+import pickle
 import flask
 import io
 from collections import Counter
@@ -15,22 +16,31 @@ from keras.models import Model
 from keras.models import load_model
 
 
-
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
 model = None
-filepath = ""#TODO: add filepath of model
+filepath_model = ""#TODO: add filepath of model
+filepath_weights = ""#TODO: add filepath of weights for model
 
 
 #this method loads the pretrained model and its weights
-def load_model():
-    #TODO: add code to load model and word embeddings
-    model = load_model(filepath)
-    #add creation of embedding layer here
-    
-    global model
-    #add loading of model and weights here
+def load_tokenizer():
+	with open('tokenizer.pickle', 'rb') as handle:
+    	tokenizer = pickle.load(handle)
+	return tokenizer
 
+def load_model():
+    #load model with its weights
+	print("loading model and weights...")
+	model = load_model(filepath_model)
+	model.load_weights(filepath_weights)
+	global model
+	print("loaded model")
+
+	print("loading tokenizer ...")
+	tokenizer = load_tokenizer()
+	global tokenizer
+	print("loaded tokenizer")
 
 #this function is preprocessing the data
 def preprocess_data(spec):
@@ -38,10 +48,8 @@ def preprocess_data(spec):
 	processed_spec = []
     strSpec = json.dumps(spec)
     processed_spec.append(strSpec)
-   
-    #tokenzie spec and generate a vector representation
-	tokenizer = Tokenizer(nb_words=35000)
-	tokenizer.fit_on_texts(processed_spec[0])
+    
+	#tokenzie spec and generate a vector representation
 	sequences = tokenizer.texts_to_sequences(processed_spec[0])
 
 	word_index = tokenizer.word_index
@@ -73,11 +81,13 @@ def predict():
 			# classify the input image and then initialize the list
 			# of predictions to return to the client
 			preds = model.predict(spec)
+			#TODO: adjust to our models code
 			results = imagenet_utils.decode_predictions(preds) # change to own code
 			data["predictions"] = []
 
 			# loop over the results and add them to the list of
 			# returned predictions
+			#TODO: adjust to our models code
 			for (imagenetID, label, prob) in results[0]:
 				r = {"label": label, "probability": float(prob)}
 				data["predictions"].append(r)
