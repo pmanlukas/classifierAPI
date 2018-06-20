@@ -20,7 +20,6 @@ from keras.models import load_model
 app = flask.Flask(__name__)
 model = None
 filepath_model = ""#TODO: add filepath of model
-filepath_weights = ""#TODO: add filepath of weights for model
 
 
 #this method loads the pretrained model and its weights
@@ -33,7 +32,6 @@ def load_model():
     #load model with its weights
 	print("loading model and weights...")
 	model = load_model(filepath_model)
-	model.load_weights(filepath_weights)
 	global model
 	print("loaded model")
 
@@ -80,16 +78,20 @@ def predict():
 
 			# classify the input image and then initialize the list
 			# of predictions to return to the client
-			preds = model.predict(spec)
-			#TODO: adjust to our models code
-			results = imagenet_utils.decode_predictions(preds) # change to own code
+			y_softmax = model.predict(spec)
+			y_pred = []
+			probs_list = []
+			for i in range(0, len(y_softmax)):
+				probs = y_softmax[i]
+				probs_list.append(probs)
+				predicted_index = np.argmax(probs)
+				y_pred.append(predicted_index)
 			data["predictions"] = []
 
 			# loop over the results and add them to the list of
 			# returned predictions
-			#TODO: adjust to our models code
-			for (imagenetID, label, prob) in results[0]:
-				r = {"label": label, "probability": float(prob)}
+			for pred in y_pred:
+				r = {"label": pred}
 				data["predictions"].append(r)
 
 			# indicate that the request was a success
