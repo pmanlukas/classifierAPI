@@ -3,21 +3,23 @@ import numpy as np
 import pandas as pd
 import json
 import pickle
+
 import flask
+from flask_restplus import Resource, Api
+
 import io
 from collections import Counter
 from datetime import datetime
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
-from keras.layers import Dense, Input, GlobalMaxPooling1D
-from keras.layers import Conv1D, MaxPooling1D, Embedding
 from keras.models import Model
 from keras.models import load_model
 
 
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
+api = Api(app)
 model = None
 filepath_model = ""#TODO: add filepath of model
 
@@ -61,6 +63,7 @@ def preprocess_data(spec):
 
 #this function adds the endpoint for our api
 @app.route("/predict", methods=["POST"])
+#TODO: add code for swagger file
 def predict():
     
     #preparation of response object
