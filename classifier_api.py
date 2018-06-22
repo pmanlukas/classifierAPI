@@ -21,12 +21,12 @@ from keras.models import load_model
 app = flask.Flask(__name__)
 api = Api(app)
 model = None
-filepath_model = ""#TODO: add filepath of model
+filepath_model = 'obj/CNN_cat.h5' #TODO: add filepath of model
 
 
 #this method loads the pretrained model and its weights
 def load_tokenizer():
-	with open('tokenizer.pickle', 'rb') as handle:
+	with open('obj/tokenizer_cat.pickle', 'rb') as handle:
     	tokenizer = pickle.load(handle)
 	return tokenizer
 
@@ -102,4 +102,3 @@ def predict():
 
 	# return the data dictionary as a JSON response
 	return flask.jsonify(data)
-
