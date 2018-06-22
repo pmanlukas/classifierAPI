@@ -5,7 +5,7 @@ import json
 import pickle
 
 import flask
-from flask_restplus import Resource, Api
+
 
 import io
 from collections import Counter
@@ -20,21 +20,21 @@ from keras.models import load_model
 app = flask.Flask(__name__)
 
 model = None
-filepath_model = 'obj/CNN_cat.h5'  # TODO: add filepath of model
+#filepath_model = r'C:\Users\lukas\Desktop\classifierAPI\obj\CNN_cat.h5'  # TODO: add filepath of model
 
 
 # this method loads the pretrained model and its weights
 def load_tokenizer():
-    with open('obj/tokenizer_cat.pickle', 'rb') as handle:
+    with open(r"C:\Users\lukas\Desktop\classifierAPI\obj\tokenizer_cat", 'rb') as handle:
         tokenizer = pickle.load(handle)
     return tokenizer
 
 
-def load_model():
+def load_models():
     # load model with its weights
     print("loading model and weights...")
     global model
-    model = load_model(filepath_model)
+    model = load_model(r"C:\Users\lukas\Desktop\classifierAPI\obj\CNN_cat.h5")
     print("loaded model")
 
     print("loading tokenizer ...")
@@ -74,7 +74,7 @@ def predict():
     if flask.request.method == "POST":
         if flask.request.files.get("spec"):
             # read the spec in json
-            spec = flask.request.files["specOpenApi"].read()
+            spec = flask.request.files["spec"].get_json()
 
             # preprocess the specification and prepare it for classification
             spec = preprocess_data(spec)
@@ -102,3 +102,7 @@ def predict():
 
     # return the data dictionary as a JSON response
     return flask.jsonify(data)
+if __name__ == "__main__":
+    print(("* Loading Keras model and Flask starting server..."))
+    load_models()
+    app.run()
