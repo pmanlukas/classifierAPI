@@ -20,10 +20,9 @@ req = requests.post(API_URL, files=payload).json()
 
 if r['success']:
     for (i, result) in enumerate(r['predictions']):
-        print '{}. {}: {:.4f}'.format(i + 1, result['label'],
-                result['probability'])
+        print
+        '{}. {}: {:.4f}'.format(i + 1, result['label'],
+                                result['probability'])
 else:
-    print 'Error with Request'
-
-
-			
+    print
+    'Error with Request'
