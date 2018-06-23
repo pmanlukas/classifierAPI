@@ -47,7 +47,7 @@ def load_models():
 def preprocess_data(spec):
     # turn json into string
     processed_spec = []
-    strSpec = json.dumps(spec)
+    strSpec = str(spec)
     processed_spec.append(strSpec)
 
     # tokenzie spec and generate a vector representation
@@ -74,13 +74,15 @@ def predict():
     if flask.request.method == "POST":
         if flask.request.files.get("spec"):
             # read the spec in json
-            spec = flask.request.files["spec"].get_json()
+            spec = flask.request.files["spec"].read()
 
             # preprocess the specification and prepare it for classification
             spec = preprocess_data(spec)
 
             # classify the input image and then initialize the list
             # of predictions to return to the client
+            print(spec)
+            print(spec.shape())
             y_softmax = model.predict(spec)
             y_pred = []
             probs_list = []

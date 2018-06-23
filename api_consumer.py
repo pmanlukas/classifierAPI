@@ -14,8 +14,7 @@ payload = {'spec': specification}
 
 # create the request
 
-req = requests.post(API_URL, files=payload)
-
+req = requests.post(API_URL, files=payload).json()
 # process the response and respond to the user
 
 if req["success"]:
