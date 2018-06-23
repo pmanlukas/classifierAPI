@@ -103,7 +103,8 @@ def predict():
             data["success"] = True
 
     # return the data dictionary as a JSON response
-    return flask.jsonify(data)
+    response = json.dumps(data)
+    return response
 if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."))
     load_models()
