@@ -47,7 +47,8 @@ def load_models():
 def preprocess_data(spec):
     # turn json into string
     processed_spec = []
-    strSpec = str(spec)
+    info = spec['info']
+    strSpec = str(info)
     processed_spec.append(strSpec)
 
     # tokenzie spec and generate a vector representation
