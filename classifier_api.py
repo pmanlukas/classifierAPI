@@ -75,7 +75,7 @@ def predict():
     if flask.request.method == "POST":
         if flask.request.files.get("spec"):
             # read the spec in json
-            spec = flask.request.files["spec"].read()
+            spec = flask.request.get_json()
 
             # preprocess the specification and prepare it for classification
             spec = preprocess_data(spec)

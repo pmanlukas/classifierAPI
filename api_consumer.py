@@ -10,6 +10,9 @@ SPEC_PATH = 'spec/test.json'
 # create payload
 
 specification = open(SPEC_PATH, 'rb').read()
+
+
+print(type(specification))
 payload = {'spec': specification}
 
 # create the request
