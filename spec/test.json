@@ -17,7 +17,7 @@
     "x-logo": {
       "backgroundColor": "#24292e",
       "url": "http://1forge.com/logo.png"
-    },
+    }
   },
   "basePath": "/forex-quotes",
   "paths": {
