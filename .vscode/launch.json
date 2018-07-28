@@ -97,13 +97,11 @@
             "name": "Python: All debug Options",
             "type": "python",
             "request": "launch",
-            "pythonPath": "${config:python.pythonPath}",
+            "pythonPath": "${workspaceRoot}",
             "program": "${file}",
             "module": "module.name",
-            "env": {
-                "VAR1": "1",
-                "VAR2": "2"
-            },
+            "env": {"PYTHONPATH":"${workspaceRoot}"},
+            
             "envFile": "${workspaceFolder}/.env",
             "args": [
                 "arg1",
