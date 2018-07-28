@@ -73,7 +73,7 @@ def predict():
     # TODO: implement prediction and adjust the code
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        if flask.request.files.get("spec"):
+        if flask.request.json:
             # read the spec in json
             spec = flask.request.get_json()
 
