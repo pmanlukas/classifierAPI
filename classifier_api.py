@@ -73,35 +73,35 @@ def predict():
     # TODO: implement prediction and adjust the code
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        if flask.request.json:
-            # read the spec in json
-            spec = flask.request.get_json()
+        
+        # read the spec in json
+        spec = flask.request.get_json()
 
-            # preprocess the specification and prepare it for classification
-            spec = preprocess_data(spec)
+        # preprocess the specification and prepare it for classification
+        spec = preprocess_data(spec)
 
-            # classify the input image and then initialize the list
-            # of predictions to return to the client
-            print(spec)
-            print(spec.shape())
-            y_softmax = model.predict(spec)
-            y_pred = []
-            probs_list = []
-            for i in range(0, len(y_softmax)):
-                probs = y_softmax[i]
-                probs_list.append(probs)
-                predicted_index = np.argmax(probs)
-                y_pred.append(predicted_index)
-            data["predictions"] = []
+        # classify the input image and then initialize the list
+        # of predictions to return to the client
+        print(spec)
+        print(spec.shape)
+        y_softmax = model.predict(spec)
+        y_pred = []
+        probs_list = []
+        for i in range(0, len(y_softmax)):
+            probs = y_softmax[i]
+            probs_list.append(probs)
+            predicted_index = np.argmax(probs)
+            y_pred.append(predicted_index)
+        data["predictions"] = []
 
-            # loop over the results and add them to the list of
-            # returned predictions
-            for pred in y_pred:
-                r = {"label": pred}
-                data["predictions"].append(r)
+        # loop over the results and add them to the list of
+        # returned predictions
+        for pred in y_pred:
+            r = {"label": pred}
+            data["predictions"].append(r)
 
-            # indicate that the request was a success
-            data["success"] = True
+        # indicate that the request was a success
+        data["success"] = True
 
     # return the data dictionary as a JSON response
     response = json.dumps(data)
