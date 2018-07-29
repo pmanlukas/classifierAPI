@@ -5,14 +5,14 @@ import json
 import pickle
 import sklearn
 import flask
-
-
 import io
 from collections import Counter
 from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
 from sklearn.externals import joblib
+from sklearn import preprocessing
+
 
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
@@ -82,10 +82,10 @@ def predict():
         print(spec.shape)
         prediction = model.predict(spec)
         encoder = load_encoder()
+        label = encoder.inverse_transform(prediction)
 
 
-
-        data["predictions"] = str(prediction)
+        data["predictions"] = str(label)
 
         # loop over the results and add them to the list of
         # returned predictions
