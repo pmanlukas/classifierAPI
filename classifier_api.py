@@ -3,18 +3,16 @@ import numpy as np
 import pandas as pd
 import json
 import pickle
-
+import sklearn
 import flask
 
 
 import io
 from collections import Counter
 from datetime import datetime
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-from keras.utils import to_categorical
-from keras.models import Model
-from keras.models import load_model
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import SGDClassifier
+from sklearn.externals import joblib
 
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
@@ -24,42 +22,36 @@ model = None
 
 
 # this method loads the pretrained model and its weights
-def load_tokenizer():
-    with open(r"C:\Users\lukas\Desktop\classifierAPI\obj\tokenizer_cat", 'rb') as handle:
-        tokenizer = pickle.load(handle)
-    return tokenizer
+def load_tftransformer():
+    with open(r"C:\Users\lukas\Desktop\classifierAPI\obj\tf_transformer.pickle", 'rb') as handle:
+        tf_transformer = pickle.load(handle)
+    return tf_transformer
 
 
 def load_models():
     # load model with its weights
     print("loading model and weights...")
     global model
-    model = load_model(r"C:\Users\lukas\Desktop\classifierAPI\obj\CNN_cat.h5")
+    #model = load_model(r"C:\Users\lukas\Desktop\classifierAPI\obj\model_svm_C.pickle")
+    model = joblib.load(r"C:\Users\lukas\Desktop\classifierAPI\obj\model_svm_C.pickle")
     print("loaded model")
 
     print("loading tokenizer ...")
-    global tokenizer
-    tokenizer = load_tokenizer()
+    global tf_transformer
+    tf_transformer = load_tftransformer()
     print("loaded tokenizer")
 
 
 # this function is preprocessing the data
 def preprocess_data(spec):
-    # turn json into string
+    # turn json into string 
     processed_spec = []
     info = spec['info']
     strSpec = str(info)
     processed_spec.append(strSpec)
 
     # tokenzie spec and generate a vector representation
-    sequences = tokenizer.texts_to_sequences(processed_spec[0])
-
-    word_index = tokenizer.word_index
-    print('Found %s unique tokens.' % len(word_index))
-
-    # pad sequence to have necessary length for final model
-    data = pad_sequences(sequences, maxlen=75000)
-
+    data = tf_transformer.transform(processed_spec)
     return data
 
 
@@ -84,21 +76,12 @@ def predict():
         # of predictions to return to the client
         print(spec)
         print(spec.shape)
-        y_softmax = model.predict(spec)
-        y_pred = []
-        probs_list = []
-        for i in range(0, len(y_softmax)):
-            probs = y_softmax[i]
-            probs_list.append(probs)
-            predicted_index = np.argmax(probs)
-            y_pred.append(predicted_index)
-        data["predictions"] = []
+        prediction = model.predict(spec)
+        
+        data["predictions"] = list(prediction)
 
         # loop over the results and add them to the list of
         # returned predictions
-        for pred in y_pred:
-            r = {"label": pred}
-            data["predictions"].append(r)
 
         # indicate that the request was a success
         data["success"] = True
