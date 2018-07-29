@@ -54,6 +54,10 @@ def preprocess_data(spec):
     data = tf_transformer.transform(processed_spec)
     return data
 
+def load_encoder():
+    with open(r"C:\Users\lukas\Desktop\classifierAPI\obj\encoder.pickle", 'rb') as handle:
+        encoder = pickle.load(handle)
+    return encoder
 
 # this function adds the endpoint for our api
 @app.route("/predict", methods=["POST"])
@@ -77,7 +81,10 @@ def predict():
         print(spec)
         print(spec.shape)
         prediction = model.predict(spec)
-        
+        encoder = load_encoder()
+
+
+
         data["predictions"] = str(prediction)
 
         # loop over the results and add them to the list of
