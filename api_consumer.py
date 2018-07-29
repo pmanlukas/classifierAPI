@@ -9,7 +9,7 @@ API_URL = 'http://127.0.0.1:5000/predict'
 SPEC_PATH = 'spec/test.json'
 
 # create the request
-headers = {'Content-Type' : 'application/json'}
+headers = {'Content-Type': 'application/json'}
 req = requests.post(API_URL, data=open(SPEC_PATH, 'rb'), headers=headers)
 
 # process the response and respond to the user
