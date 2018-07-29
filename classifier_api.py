@@ -78,7 +78,7 @@ def predict():
         print(spec.shape)
         prediction = model.predict(spec)
         
-        data["predictions"] = list(prediction)
+        data["predictions"] = str(prediction)
 
         # loop over the results and add them to the list of
         # returned predictions
