@@ -11,7 +11,7 @@ The "api_consumer.py" Python script creates a sample API call with a sample OAS 
 
 ## Instructions to run the predictive web service
 
-### as Python script:
+#### as Python script:
 
 You need to have Python 3.6 installed!
 
@@ -26,12 +26,12 @@ The following steps are necessesary to install all required Python dependencies:
 Then start the api on your machine with the following command in your Python terminal/bash:
 `python classifier_api.python`
 
-### as Docker container:
+#### as Docker container:
 
-### sample request with CURL:
+#### sample request with CURL:
 `curl -X POST -F data=@test.json 'http://127.0.0.1:5000/predict'`
 
-### sample request with api_consumer Python script:
+#### sample request with api_consumer Python script:
 
 You need to have Python 3.6 installed!
 
@@ -46,4 +46,4 @@ The following steps are necessesary to install all required Python dependencies:
 Then start the test script on your machine with the following command in your Python terminal/bash:
 `python api_consumer.py`
 
-### sample request with api_consumer Docker container:
+#### sample request with api_consumer Docker container:
