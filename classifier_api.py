@@ -23,7 +23,7 @@ model = None
 
 def load_tftransformer():
     #TODO: change to relative paths for Dockerfile
-    with open(r"C:\Users\lukas\Desktop\classifierAPI\obj\tf_transformer.pickle", 'rb') as handle:
+    with open("tf_transformer.pickle", 'rb') as handle:
         tf_transformer = pickle.load(handle)
     return tf_transformer
 
@@ -36,8 +36,7 @@ def load_models():
     global model
 
     #TODO: change to relative paths for Dockerfile
-    model = joblib.load(
-        r"C:\Users\lukas\Desktop\classifierAPI\obj\model_svm_C.pickle")
+    model = joblib.load("model_svm_C.pickle")
     print("loaded model")
 
     print("loading tokenizer ...")
@@ -63,7 +62,7 @@ def preprocess_data(spec):
 
 def load_encoder():
     #TODO: change to relative paths for Dockerfile
-    with open(r"C:\Users\lukas\Desktop\classifierAPI\obj\encoder.pickle", 'rb') as handle:
+    with open("encoder.pickle", 'rb') as handle:
         encoder = pickle.load(handle)
     return encoder
 
@@ -108,4 +107,4 @@ def predict():
 if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."))
     load_models()
-    app.run()
+    app.run(port=5000,host='0.0.0.0')

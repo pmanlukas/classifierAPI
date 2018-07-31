@@ -1,8 +1,16 @@
-FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get install -y python-pip python-dev build-essential
-COPY . /classifier_api
-WORKDIR /classifier_api
-RUN pip install -r requirements.txt
+FROM python:3.6
+MAINTAINER Lukas Pollmann "lukas.pollmann@outlook.com"
+
+WORKDIR /classifier_api/
+COPY requirements.txt /app/
+RUN pip install -r ./requirements.txt
+
+COPY classifier_api /app/
+COPY encoder.pickle /app/
+COPY model_svm_C.pickle /app/
+COPY tf_transformer.pickle /app/
+
+EXPOSE 5000
+
 ENTRYPOINT ["python"]
 CMD ["classifier_api.py"]
