@@ -24,6 +24,7 @@ The following steps are necessesary to install all required Python dependencies:
 3. run: `pip install -r requirements.txt in your shell.`
 
 Then start the api on your machine with the following command in your Python terminal/bash:
+
 `python classifier_api.python`
 
 You can then use the test request with Curl or your browser to see if the api is running. 
@@ -41,14 +42,19 @@ The response should be:
 #### as Docker container:
 
 You can build the docker container yourself with the provided Dockerfile by using the following commands:
+
 `docker build --rm -f Dockerfile -t classifierapi:latest .`
+
 and then run the container with the following command:
+
 `docker run -p 5000:5000 -it consumerapi`
 
 You can also use the image from dockerhub to run the container:
+
 `docker run -p 5000:5000 -it lukaspman/classifierapi:latest`
 
 #### sample request with CURL:
+
 `curl -X POST -F data=@test.json 'http://127.0.0.1:5000/predict'`
 
 #### sample request with api_consumer Python script:
@@ -64,4 +70,5 @@ The following steps are necessesary to install all required Python dependencies:
 3. run: `pip install -r requirements.txt in your shell.`
 
 Then start the test script on your machine with the following command in your Python terminal/bash:
+
 `python api_consumer.py`
