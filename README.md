@@ -26,6 +26,18 @@ The following steps are necessesary to install all required Python dependencies:
 Then start the api on your machine with the following command in your Python terminal/bash:
 `python classifier_api.python`
 
+You can then use the test request with Curl or your browser to see if the api is running. 
+
+In your browser enter the following url:
+`http://localhost:5000/`
+The response should be:
+`Hello World!`
+
+With curl enter the following curl statement:
+`curl http://localhost:5000/`
+The response should be:
+`<h1>Hello World!</h1>`
+
 #### as Docker container:
 
 #### sample request with CURL:
