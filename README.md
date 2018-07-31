@@ -46,7 +46,7 @@ and then run the container with the following command:
 `docker run -p 5000:5000 -it consumerapi`
 
 You can also use the image from dockerhub to run the container:
-``
+`docker run -p 5000:5000 -it lukaspman/classifierapi:latest`
 
 #### sample request with CURL:
 `curl -X POST -F data=@test.json 'http://127.0.0.1:5000/predict'`
