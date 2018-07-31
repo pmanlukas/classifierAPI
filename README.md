@@ -40,6 +40,14 @@ The response should be:
 
 #### as Docker container:
 
+You can build the docker container yourself with the provided Dockerfile by using the following commands:
+`docker build --rm -f Dockerfile -t classifierapi:latest .`
+and then run the container with the following command:
+`docker run -p 5000:5000 -it consumerapi`
+
+You can also use the image from dockerhub to run the container:
+``
+
 #### sample request with CURL:
 `curl -X POST -F data=@test.json 'http://127.0.0.1:5000/predict'`
 
@@ -57,5 +65,3 @@ The following steps are necessesary to install all required Python dependencies:
 
 Then start the test script on your machine with the following command in your Python terminal/bash:
 `python api_consumer.py`
-
-#### sample request with api_consumer Docker container:
