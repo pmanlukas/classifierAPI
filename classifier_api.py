@@ -110,3 +110,4 @@ if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."))
     load_models()
     app.run(port=5000,host='0.0.0.0')
+    app.run(debug=True)
