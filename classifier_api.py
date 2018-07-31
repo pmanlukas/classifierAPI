@@ -67,7 +67,9 @@ def load_encoder():
     return encoder
 
 # this function adds the endpoint for our api
-
+@app.route("/")
+def hello():
+    return "<h1>Hello World!</h1>"
 
 @app.route("/predict", methods=["POST"])
 def predict():
