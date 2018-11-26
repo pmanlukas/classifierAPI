@@ -7,7 +7,7 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  imageName: 'classifier-api:$(build.buildId)'
+  imageName: 'classifier-api:latest'
 
 steps:
 - script: |
