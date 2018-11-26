@@ -71,6 +71,10 @@ def load_encoder():
 def hello():
     return "<h1>Hello World!</h1>"
 
+@app.route("/test")
+def test():
+    return "This is a test!"
+
 @app.route("/predict", methods=["POST"])
 def predict():
     # preparation of response object
