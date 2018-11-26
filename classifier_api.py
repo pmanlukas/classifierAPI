@@ -73,7 +73,7 @@ def hello():
 
 @app.route("/test")
 def test():
-    return "This is a test!"
+    return "This is a test! only a test :)"
 
 @app.route("/predict", methods=["POST"])
 def predict():
