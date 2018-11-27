@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: pmanlukas/classifier-api
-  tag: stable
+  repository: pmanlukas/classifier_api
+  tag: latest
   pullPolicy: IfNotPresent
 
 nameOverride: ""
