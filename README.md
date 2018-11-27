@@ -2,6 +2,10 @@
 
 [![Build Status](https://dev.azure.com/lupollma/classifier/_apis/build/status/pmanlukas.classifierAPI)](https://dev.azure.com/lupollma/classifier/_build/latest?definitionId=1)
 
+### new pipeline status: 
+
+[![Build Status](https://dev.azure.com/pmanlukas/classifierapi/_apis/build/status/pmanlukas.classifierAPI)](https://dev.azure.com/pmanlukas/classifierapi/_build/latest?definitionId=1)
+
 A simple Flask web service to implement an API for a keras classifier based on the following [tutorial](https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html) and my own custom classifier for openAPI specifications. 
 
 The API accepts a POST request with a JSON encoded [openAPI Spec](https://github.com/OAI/OpenAPI-Specification) as payload. The response is the predicted category of the API based on the classifier implemented in the API. The API only accepts the Version 2.0 of the [OAS](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) as input and only one file per request. 
