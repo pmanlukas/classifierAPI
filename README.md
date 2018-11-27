@@ -1,10 +1,11 @@
 # classifierAPI
 
-[![Build Status](https://dev.azure.com/lupollma/classifier/_apis/build/status/pmanlukas.classifierAPI)](https://dev.azure.com/lupollma/classifier/_build/latest?definitionId=1)
-
-### new pipeline status: 
-
+### build pipelines: 
+- Docker Hub pipeline
 [![Build Status](https://dev.azure.com/pmanlukas/classifierapi/_apis/build/status/pmanlukas.classifierAPI)](https://dev.azure.com/pmanlukas/classifierapi/_build/latest?definitionId=1)
+
+- K8s pipeline
+[![Build Status](https://dev.azure.com/pmanlukas/classifierapi/_apis/build/status/classifierapi-Azure%20Kubernetes%20Service%20-CI)](https://dev.azure.com/pmanlukas/classifierapi/_build/latest?definitionId=2)
 
 A simple Flask web service to implement an API for a keras classifier based on the following [tutorial](https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html) and my own custom classifier for openAPI specifications. 
 
