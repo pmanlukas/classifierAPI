@@ -80,3 +80,15 @@ The following steps are necessesary to install all required Python dependencies:
 Then start the test script on your machine with the following command in your Python terminal/bash:
 
 `python api_consumer.py`
+
+### Setup on Kubernetes
+
+The project now also features a [helm](https://helm.sh) chart to deploy the "classifierAPI" Flask application on a [Kubernetes](https://kubernetes.io) Cluster. You need to have a Kubernetes Cluster together with Helm and Tiller to use the helm chart. 
+
+To install the helm chart you need to do the following steps
+
+`cd /classifierapi/`
+
+`helm install .`
+
+In the future the chart will also be available in a helm repo.
